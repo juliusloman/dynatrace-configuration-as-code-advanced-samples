@@ -1,0 +1,20 @@
+manifestVersion: "1.0"
+projects:
+  - name: dashboard-snippets
+
+environmentGroups:
+- name: default
+  environments:
+  # Adapt for your Dynatrace environments
+  - name: abc12345
+    url:
+      value: https://abc12345.apps.dynatrace.com
+    auth:
+      token:
+        type: environment
+        name: APITOKEN_ABC12345
+      oAuth:
+        clientId:
+          name: OAUTHCLIENT_ABC12345
+        clientSecret:
+          name: OAUTHSECRET_ABC12345

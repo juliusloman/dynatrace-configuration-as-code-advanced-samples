@@ -1,0 +1,74 @@
+configs:
+- id: dashboard-snippet1
+  config:
+    name: "Dashboard with Snippets1"
+    parameters:
+      # General parameters
+      serviceTag: "service1"
+      processTag: "process1"
+
+      # Snippet for JVM Metrics
+      snippet_JVM_left: 0  # left snippet boundary
+      snippet_JVM_top: 0   # top snippet boundary
+      snippet_JVM:
+        type: file
+        path: snippets/JVM.json
+        escape: false
+        references:
+          - snippet_JVM_left
+          - snippet_JVM_top
+          - processTag
+
+      # Snippet for Service Metrics
+      snippet_ServiceMetrics_left: 0  # left snippet boundary
+      snippet_ServiceMetrics_top: 304 # top snippet boundary - this has to be a constant we can't do relative calculation
+      snippet_ServiceMetrics:
+        type: file
+        path: snippets/ServiceMetrics.json
+        escape: false
+        references:
+          - snippet_ServiceMetrics_left
+          - snippet_ServiceMetrics_top
+          - serviceTag
+
+    template: dashboard.json
+    skip: false
+  type:
+    api: dashboard
+
+- id: dashboard-snippet2
+  config:
+    name: "Dashboard with Snippets2"
+    parameters:
+      # General parameters
+      serviceTag: "service2"
+      processTag: "process2"
+
+      # Snippet for JVM Metrics
+      snippet_JVM_left: 0  # left snippet boundary
+      snippet_JVM_top: 0   # top snippet boundary
+      snippet_JVM:
+        type: file
+        path: snippets/JVM.json
+        escape: false
+        references:
+          - snippet_JVM_left
+          - snippet_JVM_top
+          - processTag
+
+      # Snippet for Service Metrics
+      snippet_ServiceMetrics_left: 0  # left snippet boundary
+      snippet_ServiceMetrics_top: 304 # top snippet boundary - this has to be a constant we can't do relative calculation
+      snippet_ServiceMetrics:
+        type: file
+        path: snippets/ServiceMetrics.json
+        escape: false
+        references:
+          - snippet_ServiceMetrics_left
+          - snippet_ServiceMetrics_top
+          - serviceTag
+
+    template: dashboard.json
+    skip: false
+  type:
+    api: dashboard

@@ -1,0 +1,15 @@
+{
+  "dashboardMetadata": {
+    "dashboardFilter": null,
+    "hasConsistentColors": false,
+    "name": "{{.name}}",
+    "owner": "Monaco",
+    "preset": true,
+    "shared": true,
+    "tilesNameSize": null
+  },
+  "tiles": [
+    {{ .snippet_JVM }}
+    , {{ .snippet_ServiceMetrics }}
+]
+}
