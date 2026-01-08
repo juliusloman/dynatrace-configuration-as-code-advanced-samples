@@ -1,6 +1,7 @@
 manifestVersion: "1.0"
 projects:
   - name: dashboard-snippets
+  - name: dashboard-autolayout
 
 environmentGroups:
 - name: default

@@ -1,0 +1,131 @@
+{
+    "version": 19,
+    "variables": [],
+    "tiles": {
+{{- range $i, $e := .services}}    
+{{- if $i}},{{- end}}
+        "{{$i}}": {
+            "type": "data",
+            "title": "{{ $e.title }}",
+            "query": "timeseries { `Response time` = avg(dt.service.request.response_time), value.A = avg(dt.service.request.response_time, scalar: true), Requests = sum(dt.service.request.count), value.B = avg(dt.service.request.count, scalar: true) }, union: TRUE, filter: { matchesValue(entityAttr(dt.entity.service, \"tags\"), \"{{ $e.tag }}\") }",
+            "queryConfig": {
+                "version": "15.4.0",
+                "subQueries": [
+                    {
+                        "id": "A",
+                        "isEnabled": true,
+                        "datatype": "metrics",
+                        "metric": {
+                            "key": "dt.service.request.response_time",
+                            "alias": "Response time",
+                            "aggregation": "avg"
+                        },
+                        "filter": "dt.entity.service.tags = {{ $e.tag}} "
+                    },
+                    {
+                        "id": "B",
+                        "isEnabled": true,
+                        "datatype": "metrics",
+                        "metric": {
+                            "key": "dt.service.request.count",
+                            "alias": "Requests",
+                            "aggregation": "sum"
+                        },
+                        "filter": "dt.entity.service.tags = {{ $e.tag}}  "
+                    }
+                ]
+            },
+            "subType": "dql-builder-metrics",
+            "visualization": "lineChart",
+            "davis": {
+                "enabled": false,
+                "davisVisualization": {
+                    "isAvailable": true
+                }
+            },
+            "visualizationSettings": {
+                "autoSelectVisualization": false,
+                "thresholds": [],
+                "table": {
+                    "columnTypeOverrides": [
+                        {
+                            "fields": [
+                                "Response time",
+                                "Requests"
+                            ],
+                            "value": "sparkline",
+                            "id": 1755890244552
+                        }
+                    ]
+                },
+                "chartSettings": {
+                    "legend": {
+                        "hidden": false,
+                        "position": "bottom"
+                    },
+                    "seriesOverrides": [
+                        {
+                            "seriesId": [
+                                "Requests"
+                            ],
+                            "override": {
+                                "geometry": "bar"
+                            }
+                        },
+                        {
+                            "seriesId": [
+                                "Response time"
+                            ],
+                            "override": {
+                                "color": {
+                                    "Default": "var(--dt-colors-charts-categorical-color-01-default, #134fc9)"
+                                }
+                            }
+                        }
+
+                    ],
+                    "hiddenLegendFields": [
+                        "value.A",
+                        "value.B",
+                        "value.C"
+                    ]
+                }
+            },
+            "querySettings": {
+                "maxResultRecords": 1000,
+                "defaultScanLimitGbytes": 500,
+                "maxResultMegaBytes": 1,
+                "defaultSamplingRatio": 10,
+                "enableSampling": false
+            }
+        }
+{{- end}}        
+    },
+    "layouts": {
+
+{{- $tileWidth := 6 }}
+{{- $tileHeight := 4 }}
+{{- $maxWidth := 18 }}
+{{- $left := 0 }}{{ $top := 0 }}
+
+{{- range $i, $e := .services}}    
+        {{- if $i}},{{- end}}
+        "{{$i}}": {
+            "x": {{ $left }},
+            "y": {{ $top }},
+            "w": {{ $tileWidth}},
+            "h": {{ $tileHeight }}
+        }
+
+        {{- $left = len (printf "%s%s" (printf "%*s" $left "") (printf "%*s" $tileWidth "")) }}
+        {{- if gt $left $maxWidth}}
+        {{- $left = 0 }}
+        {{- $top = len (printf "%s%s" (printf "%*s" $top "") (printf "%*s" $tileHeight ""))}}
+        {{- end}}        
+{{- end}}        
+ 
+
+   },
+    "importedWithCode": false,
+    "settings": {}
+}

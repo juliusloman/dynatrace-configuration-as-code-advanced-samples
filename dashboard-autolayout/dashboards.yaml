@@ -1,0 +1,56 @@
+configs:
+- id: sample-dashboard-with-auto-layout
+  config:
+    name: "Sample Dashboard with Auto Layout"
+    parameters:
+      services:
+        type: value
+        value:
+        - tag: mytag1
+          title: My Service with My Tag 1
+        - tag: mytag2
+          title: My Service with My Tag 2
+        - tag: mytag3
+          title: My Service with My Tag 3
+        - tag: mytag4
+          title: My Service with My Tag 4
+        - tag: mytag5
+          title: My Service with My Tag 5
+        - tag: mytag6
+          title: My Service with My Tag 6
+        - tag: mytag7
+          title: My Service with My Tag 7
+        - tag: mytag8
+          title: My Service with My Tag 8
+    template: dashboard-autolayout.json
+    skip: false
+  type:
+    api: dashboard
+
+- id: gen3-sample-dashboard-with-auto-layout
+  config:
+    name: "Sample Dashboard with Auto Layout"
+    parameters:
+      services:
+        type: value
+        value:
+        - tag: mytag1
+          title: My Service with My Tag 1
+        - tag: mytag2
+          title: My Service with My Tag 2
+        - tag: mytag3
+          title: My Service with My Tag 3
+        - tag: mytag4
+          title: My Service with My Tag 4
+        - tag: mytag5
+          title: My Service with My Tag 5
+        - tag: mytag6
+          title: My Service with My Tag 6
+        - tag: mytag7
+          title: My Service with My Tag 7
+        - tag: mytag8
+          title: My Service with My Tag 8
+    template: gen3-dashboard-autolayout.json
+  type:
+    document:
+      kind: dashboard
